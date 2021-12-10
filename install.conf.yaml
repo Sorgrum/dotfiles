@@ -1,13 +1,13 @@
 - clean: ['~']
-
+- create:
+    - ~/.local/share/nvim/backup/
 - link:
     ~/.profile: profile
     ~/.bash_profile: bash_profile
     ~/.bashrc: bashrc
     ~/.bash_logout: bash_logout
     ~/.tmux.conf: tmux.conf
-    ~/.vimrc: vimrc
+    ~/.config/nvim: nvim
+    ~/.config/starship.toml: starship.toml
     ~/.zshenv: zshenv
     ~/.zshrc: zshrc
-
-

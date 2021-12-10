@@ -9,7 +9,35 @@ DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "${BASEDIR}"
+
+cmd_found () { command -v "$@" >/dev/null; }
+cmd_not_found() { ! cmd_found "$@"; }
+
+# Install dependencies depending on OS
+    
+    # General
+    cmd_not_found antibody && echo "Installing antibody" && (curl -sfL git.io/antibody | sh -s - -b /usr/local/bin)
+    cmd_not_found starship && echo "Installing Starship" && sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+
+    # Fedora
+    if cmd_found dnf; then
+        echo "Installing Fedora dependencies"
+        sudo dnf install exa fzf bat neovim python3-neovim nodejs
+    fi
+
+    if cmd_found brew; then
+        echo "Installing MacOS dependencies"
+
+        # fzf
+        brew install fzf bat neovim node gawk
+        $(brew --prefix)/opt/fzf/install
+    fi
+
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
+    -d "${BASEDIR}" \
+    -c "${CONFIG}" \
+    "${@}"
+
