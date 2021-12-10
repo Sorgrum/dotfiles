@@ -10,6 +10,9 @@
     # Setup required env var for oh-my-zsh plugins
     export ZSH="$(antibody home)/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
 
+    # Speed up nvm load
+    export NVM_LAZY_LOAD=true
+
     antibody bundle caarlos0/zsh-open-github-pr
     antibody bundle ohmyzsh/ohmyzsh path:plugins/extract
     antibody bundle ohmyzsh/ohmyzsh path:plugins/dirhistory
@@ -19,6 +22,8 @@
     antibody bundle Aloxaf/fzf-tab
     antibody bundle mdumitru/fancy-ctrl-z
     antibody bundle zdharma-continuum/fast-syntax-highlighting
+    antibody bundle buonomo/yarn-completion
+    antibody bundle lukechilds/zsh-nvm
     antibody bundle zsh-users/zsh-autosuggestions
     antibody bundle zsh-users/zsh-completions
     antibody bundle dracula/zsh
@@ -41,6 +46,11 @@
     # Silence
     unsetopt BEEP
 
+    # Improve autocompletion style
+    zstyle ':completion:*' menu select # select completions with arrow keys
+    zstyle ':completion:*' group-name '' # group results by category
+    zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
+
     path=(
         $HOME/.local/bin
         $HOME/.bin
@@ -53,6 +63,10 @@
         $HOME/projects
         $HOME/Development
     )
+
+    if [ -f ~/.zshrc_local ]; then
+        source ~/.zshrc_local
+    fi
 
 # Aliases & Functions {{{
 # ==============================================================================
