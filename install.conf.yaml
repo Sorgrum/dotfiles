@@ -1,9 +1,19 @@
 - clean: ['~']
+
 - create:
     - ~/.local/share/nvim/backup/
+
 - link:
-    ~/.tmux.conf: tmux.conf
     ~/.config/nvim: nvim
     ~/.config/starship.toml: starship.toml
+    ~/.muttrc: muttrc
+    ~/.mailcap: mailcap
+    ~/.tmux: tmux
+    ~/.tmux.conf: tmux.conf
     ~/.zshenv: zshenv
     ~/.zshrc: zshrc
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
+    - [~/.tmux/plugins/tpm/scripts/install_plugins.sh >/dev/null 2>&1, Installing tmux plugins]
+    - ["vim +PlugUpdate +PlugClean! +qa", Installing and updating plugins]

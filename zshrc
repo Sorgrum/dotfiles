@@ -22,7 +22,6 @@
     antibody bundle Aloxaf/fzf-tab
     antibody bundle mdumitru/fancy-ctrl-z
     antibody bundle zdharma-continuum/fast-syntax-highlighting
-    antibody bundle buonomo/yarn-completion
     antibody bundle lukechilds/zsh-nvm
     antibody bundle zsh-users/zsh-autosuggestions
     antibody bundle zsh-users/zsh-completions
@@ -97,6 +96,7 @@
 
     # General
     alias cat='bat'
+    alias pat='bat -p'
     alias cmd='command'
     alias ls='exa -l --git'
     alias l='command ls -lAFh'

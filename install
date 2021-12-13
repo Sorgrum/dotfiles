@@ -22,14 +22,14 @@ cmd_not_found() { ! cmd_found "$@"; }
     # Fedora
     if cmd_found dnf; then
         echo "Installing Fedora dependencies"
-        sudo dnf install exa fzf bat neovim python3-neovim nodejs
+        sudo dnf install exa fzf bat neovim python3-neovim nodejs w3m mutt
     fi
 
     if cmd_found brew; then
         echo "Installing MacOS dependencies"
 
         # fzf
-        brew install fzf bat neovim node gawk
+        brew install fzf bat neovim node gawk w3m mutt
         $(brew --prefix)/opt/fzf/install
     fi
 
