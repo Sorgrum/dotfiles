@@ -42,6 +42,8 @@
 
     export GIT_EDITOR=vim
 
+    export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins/"
+
     # Silence
     unsetopt BEEP
 

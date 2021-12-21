@@ -30,6 +30,10 @@ cmd_not_found() { ! cmd_found "$@"; }
 
         # fzf
         brew install exa fzf bat neovim node gawk w3m mutt
+
+        # Enable python plugins
+        python3 -m pip install --user --upgrade pynvim
+
         $(brew --prefix)/opt/fzf/install
     fi
 
