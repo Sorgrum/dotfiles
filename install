@@ -29,7 +29,7 @@ cmd_not_found() { ! cmd_found "$@"; }
         echo "Installing MacOS dependencies"
 
         # fzf
-        brew install fzf bat neovim node gawk w3m mutt
+        brew install exa fzf bat neovim node gawk w3m mutt
         $(brew --prefix)/opt/fzf/install
     fi
 
