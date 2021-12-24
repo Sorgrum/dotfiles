@@ -57,6 +57,8 @@
         $HOME/.bin
         $HOME/bin
         $HOME/.go/bin
+        $HOME/.yarn/bin
+        $HOME/.config/yarn/global/node_modules/.bin
         $path
     )
 
@@ -105,4 +107,5 @@
     alias vim='nvim'
     alias ze='vim ~/.zshrc'
     alias zs='source ~/.zshrc'
+
 
