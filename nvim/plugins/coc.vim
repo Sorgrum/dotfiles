@@ -10,13 +10,12 @@ let g:coc_global_extensions = [
     \ 'coc-html',
     \ 'coc-json',
     \ 'coc-pairs',
+    \ 'coc-prettier',
     \ 'coc-sh',
     \ 'coc-snippets',
     \ 'coc-sql',
     \ 'coc-svg',
-    \ 'https://github.com/rodrigore/coc-tailwind-intellisense',
     \ 'coc-tsserver',
-    \ '@yaegassy/coc-volar',
 \ ]
 
 function! s:check_back_space() abort
@@ -24,12 +23,12 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" " Use <c-space> to trigger completion.
-" if has('nvim')
-"   inoremap <silent><expr> <c-tab> coc#refresh()
-" else
-"   inoremap <silent><expr> <c-@> coc#refresh()
-" endif
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-tab> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
@@ -110,3 +109,5 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 nmap <leader>l :CocFzfList<cr>
+
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')

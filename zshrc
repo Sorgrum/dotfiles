@@ -12,7 +12,8 @@
 
     # Speed up nvm load
     export NVM_LAZY_LOAD=true
-
+    
+    antibody bundle desyncr/auto-ls
     antibody bundle caarlos0/zsh-open-github-pr
     antibody bundle ohmyzsh/ohmyzsh path:plugins/extract
     antibody bundle ohmyzsh/ohmyzsh path:plugins/dirhistory
@@ -28,6 +29,9 @@
     antibody bundle dracula/zsh
     autoload -Uz compinit && compinit
 
+    # Auto load env variables when entering a new dir
+    eval "$(direnv hook zsh)"
+
 # Configuration {{{
 # ==============================================================================
 
@@ -41,6 +45,7 @@
     eval "$(starship init zsh)"
 
     export GIT_EDITOR=vim
+    export EDITOR=vim
 
     export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins/"
 
@@ -52,13 +57,24 @@
     zstyle ':completion:*' group-name '' # group results by category
     zstyle ':completion:::::' completer _expand _complete _ignored _approximate # enable approximate matches for completion
 
+    cmd_found () { command -v "$@" >/dev/null; }
+    cmd_not_found() { ! cmd_found "$@"; }
+
+    if cmd_found brew; then
+        export GOPATH=$HOME/Development/go
+    else
+        export GOPATH=$HOME/projects/go
+    fi
+
     path=(
         $HOME/.local/bin
         $HOME/.bin
         $HOME/bin
         $HOME/.go/bin
         $HOME/.yarn/bin
+        $HOME/.rbenv/bin
         $HOME/.config/yarn/global/node_modules/.bin
+        $GOPATH/bin
         $path
     )
 
@@ -70,6 +86,8 @@
     if [ -f ~/.zshrc_local ]; then
         source ~/.zshrc_local
     fi
+
+    eval "$(rbenv init -)"
 
 # Aliases & Functions {{{
 # ==============================================================================
@@ -108,4 +126,6 @@
     alias ze='vim ~/.zshrc'
     alias zs='source ~/.zshrc'
 
-
+    # Development
+    alias build="docker compose build"
+    alias up="docker compose up"

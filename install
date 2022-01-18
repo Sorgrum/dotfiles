@@ -22,20 +22,35 @@ cmd_not_found() { ! cmd_found "$@"; }
     # Fedora
     if cmd_found dnf; then
         echo "Installing Fedora dependencies"
-        sudo dnf install exa fzf bat neovim python3-neovim nodejs w3m mutt
+
+        # Install dependencies
+        sudo dnf install exa fzf bat neovim python3-neovim nodejs w3m mutt direnv podman ripgrep rbenv
+
+        # Font
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
     fi
 
+    # macOS
     if cmd_found brew; then
         echo "Installing MacOS dependencies"
 
-        # fzf
-        brew install exa fzf bat neovim node gawk w3m mutt
+        # Install dependencies
+        brew install exa fzf bat neovim node gawk w3m mutt direnv podman ripgrep rbenv tmuxinator
+
+        # Font
+        if [ ! -d "/Library/Fonts/JetBrains Mono Regular Nerd Font Complete Mono.ttf"]; then
+            brew tap homebrew/cask-fonts
+            brew reinstall --cask font-jetbrains-mono
+        fi
 
         # Enable python plugins
         python3 -m pip install --user --upgrade pynvim
 
-        $(brew --prefix)/opt/fzf/install
+        yes n | $(brew --prefix)/opt/fzf/install
     fi
+
+    # All OS's
+    pip3 install podman-compose
 
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"

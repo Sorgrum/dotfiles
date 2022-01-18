@@ -44,6 +44,8 @@ let mapleader = "\<space>"
 nmap <leader>ve :edit ~/.config/nvim/init.vim<cr>
 nmap <leader>vc :edit ~/.config/nvim/coc-settings.json<cr>
 nmap <leader>vr :source ~/.config/nvim/init.vim<cr>
+nmap <leader>vs :vsp<cr>
+nmap <leader>v<cr> :sp<cr>
 
 nmap <leader>k :nohlsearch<CR>
 nmap <leader>Q :bufdo bdelete<cr>
@@ -104,7 +106,6 @@ source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/commentary.vim
 source ~/.config/nvim/plugins/context-commentstring.vim
 source ~/.config/nvim/plugins/dispatch.vim
-source ~/.config/nvim/plugins/dracula.vim
 source ~/.config/nvim/plugins/editorconfig.vim
 source ~/.config/nvim/plugins/eunuch.vim
 source ~/.config/nvim/plugins/exchange.vim
@@ -117,16 +118,18 @@ source ~/.config/nvim/plugins/lightline.vim
 source ~/.config/nvim/plugins/lion.vim
 source ~/.config/nvim/plugins/markdown-preview.vim
 source ~/.config/nvim/plugins/nerdtree.vim
+source ~/.config/nvim/plugins/onedark.vim
 source ~/.config/nvim/plugins/pasta.vim
 source ~/.config/nvim/plugins/peekaboo.vim
 source ~/.config/nvim/plugins/polyglot.vim
 source ~/.config/nvim/plugins/quickscope.vim
+source ~/.config/nvim/plugins/remote-containers.vim
 source ~/.config/nvim/plugins/repeat.vim
-source ~/.config/nvim/plugins/rooter.vim
 source ~/.config/nvim/plugins/smooth-scroll.vim
 source ~/.config/nvim/plugins/splitjoin.vim
 source ~/.config/nvim/plugins/surround.vim
 source ~/.config/nvim/plugins/targets.vim
+source ~/.config/nvim/plugins/trouble.vim
 source ~/.config/nvim/plugins/unimpaired.vim
 source ~/.config/nvim/plugins/vim-test.vim
 source ~/.config/nvim/plugins/visual-multi.vim
