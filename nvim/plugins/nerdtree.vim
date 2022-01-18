@@ -18,3 +18,22 @@ let g:plug_window = 'noautocmd vertical topleft new'
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableFolderExtensionPatternMatching = 1
+
+" open nerdtree automatically when vim starts
+function! StartUp()
+if !argc() && !exists("s:std_in")
+    NERDTree
+    wincmd p
+end
+if argc() && isdirectory(argv()[0]) && !exists("s:std_in")
+    exe 'NERDTree' argv()[0]
+    wincmd p
+    ene
+end
+endfunction
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * call StartUp()
+
+" close vim if nerdtree is the only buffer left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
