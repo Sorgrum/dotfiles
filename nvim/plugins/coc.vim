@@ -3,8 +3,8 @@ Plug 'antoinemadec/coc-fzf'
 
 let g:coc_global_extensions = [
     \ 'coc-css',
+    \ 'coc-cssmodules',
     \ 'coc-diagnostic',
-    \ 'coc-emmet',
     \ 'coc-eslint',
     \ 'coc-git',
     \ 'coc-html',

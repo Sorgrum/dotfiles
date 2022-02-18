@@ -1,6 +1,13 @@
 #           Personal .zshrc file of Marcelo Gheiler <me@marcelogheiler.com>
 #
 
+# Setup {{{
+# ==============================================================================
+    # Custom function to run when `cd`ing
+    auto-ls-exa () {
+      exa -l --git
+    }
+
 # Plugins {{{
 # ==============================================================================
     source <(antibody init)
@@ -46,8 +53,10 @@
 
     export GIT_EDITOR=vim
     export EDITOR=vim
+    export BROWSER=firefox
 
     export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins/"
+    export AUTO_LS_COMMANDS=(exa)
 
     # Silence
     unsetopt BEEP
