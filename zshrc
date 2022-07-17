@@ -134,6 +134,7 @@
     alias vim='nvim'
     alias ze='vim ~/.zshrc'
     alias zs='source ~/.zshrc'
+    alias ssh='et'
 
     # Development
     alias build="docker compose build"
