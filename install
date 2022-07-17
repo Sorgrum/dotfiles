@@ -24,7 +24,7 @@ cmd_not_found() { ! cmd_found "$@"; }
         echo "Installing Fedora dependencies"
 
         # Install dependencies
-        sudo dnf install exa fzf bat neovim python3-neovim nodejs w3m mutt direnv podman ripgrep rbenv gh
+        sudo dnf install exa fzf bat neovim python3-neovim nodejs w3m mutt direnv podman ripgrep rbenv gh et
 
         # Font
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
@@ -35,7 +35,7 @@ cmd_not_found() { ! cmd_found "$@"; }
         echo "Installing MacOS dependencies"
 
         # Install dependencies
-        brew install exa fzf bat neovim node gawk w3m mutt direnv podman ripgrep rbenv tmuxinator gh
+        brew install exa fzf bat neovim node gawk w3m mutt direnv podman ripgrep rbenv tmuxinator gh MisterTea/et/et
 
         # Font
         if [ ! -d "/Library/Fonts/JetBrains Mono Regular Nerd Font Complete Mono.ttf"]; then
