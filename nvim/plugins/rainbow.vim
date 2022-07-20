@@ -1,0 +1,1 @@
+Plug 'frazrepo/vim-rainbow'

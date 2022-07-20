@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
 #           Personal .zshrc file of Marcelo Gheiler <me@marcelogheiler.com>
 #
 
@@ -89,10 +91,6 @@
         $HOME/Development
     )
 
-    if [ -f ~/.zshrc_local ]; then
-        source ~/.zshrc_local
-    fi
-
     eval "$(rbenv init -)"
 
 # Aliases & Functions {{{
@@ -136,3 +134,12 @@
     # Development
     alias build="docker compose build"
     alias up="docker compose up"
+    alias dclean="docker system prune"
+
+
+    if [ -f ~/.zshrc_local ]; then
+        source ~/.zshrc_local
+    fi
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
