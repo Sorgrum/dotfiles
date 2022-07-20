@@ -12,8 +12,6 @@
 # ==============================================================================
     source <(antibody init)
 
-    export FZF_BASE=~/.local/share/nvim/site/plugins/fzf
-
     # Setup required env var for oh-my-zsh plugins
     export ZSH="$(antibody home)/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
 
@@ -27,7 +25,6 @@
     antibody bundle ohmyzsh/ohmyzsh path:plugins/fzf
     antibody bundle ohmyzsh/ohmyzsh path:plugins/sudo
     antibody bundle zpm-zsh/ssh
-    antibody bundle Aloxaf/fzf-tab
     antibody bundle mdumitru/fancy-ctrl-z
     antibody bundle zdharma-continuum/fast-syntax-highlighting
     antibody bundle lukechilds/zsh-nvm

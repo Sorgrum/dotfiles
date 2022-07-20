@@ -14,7 +14,7 @@ cmd_found () { command -v "$@" >/dev/null; }
 cmd_not_found() { ! cmd_found "$@"; }
 
 # Install dependencies depending on OS
-    
+
     # General
     cmd_not_found antibody && echo "Installing antibody" && (curl -sfL git.io/antibody | sh -s - -b /usr/local/bin)
     cmd_not_found starship && echo "Installing Starship" && sh -c "$(curl -fsSL https://starship.rs/install.sh)"
@@ -23,11 +23,33 @@ cmd_not_found() { ! cmd_found "$@"; }
     if cmd_found dnf; then
         echo "Installing Fedora dependencies"
 
+        # Install rbenv
+        if [ ! -d ~/.rbenv ]; then
+            echo '~/.rbenv does not exist, installing rbenv'
+            git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+            echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+            echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+            source ~/.bashrc
+            exec $SHELL
+
+            git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+            echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+            source ~/.bashrc
+            exec $SHELL
+        fi
+
         # Install dependencies
-        sudo dnf install exa fzf bat neovim python3-neovim nodejs w3m mutt direnv podman ripgrep rbenv gh et
+        sudo dnf install fontconfig unzip exa fzf bat neovim python3-pip python3-neovim nodejs w3m mutt direnv podman ripgrep gh et tmux zsh man-db iputils
+
+        # Change default shell to ZSH
+        echo $(which zsh) | sudo lchsh $(whoami)
 
         # Font
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/install_manual.sh)"
+
+        # Vim plugins
+        sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+                https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     fi
 
     # macOS
@@ -35,7 +57,7 @@ cmd_not_found() { ! cmd_found "$@"; }
         echo "Installing MacOS dependencies"
 
         # Install dependencies
-        brew install exa fzf bat neovim node gawk w3m mutt direnv podman ripgrep rbenv tmuxinator gh MisterTea/et/et
+        brew install exa fzf bat neovim node gawk w3m mutt direnv podman ripgrep rbenv tmuxinator gh MisterTea/et/et tmux
 
         # Font
         if [ ! -d "/Library/Fonts/JetBrains Mono Regular Nerd Font Complete Mono.ttf"]; then
@@ -47,10 +69,33 @@ cmd_not_found() { ! cmd_found "$@"; }
         python3 -m pip install --user --upgrade pynvim
 
         yes n | $(brew --prefix)/opt/fzf/install
+
+    # Vim plugins
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     fi
 
     # All OS's
+
+    if ! grep -q "run -b '~/.tmux/plugins/tpm/tpm'" ~/.tmux.conf; then 
+        echo 'Installing tpm'; 
+
+    if [ ! -d ~/.tmux/plugins/tpm ]; then
+        # Cloning latest tpm
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
+
+    printf "\n\nrun -b '~/.tmux/plugins/tpm/tpm'" >> ~/.tmux.conf
+    tmux source ~/.tmux.conf
+    fi
+
+    mkdir -p ~/.config
     pip3 install podman-compose
+
+    if ! sudo grep -q "earth" /etc/hosts; then
+        echo "Adding shortname for earth"
+        sudo sh -c 'echo "149.28.60.187     marcelogheiler.com  earth" >> /etc/hosts'
+    fi
 
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
@@ -60,3 +105,4 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
     -c "${CONFIG}" \
     "${@}"
 
+echo "Installation completed. Please reopen your terminal."
