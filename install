@@ -60,7 +60,7 @@ cmd_not_found() { ! cmd_found "$@"; }
         brew install exa fzf bat neovim node gawk w3m mutt direnv podman ripgrep rbenv tmuxinator gh MisterTea/et/et tmux
 
         # Font
-        if [ ! -d "/Library/Fonts/JetBrains Mono Regular Nerd Font Complete Mono.ttf"]; then
+        if [ ! -d "/Library/Fonts/JetBrains Mono Regular Nerd Font Complete Mono.ttf" ]; then
             brew tap homebrew/cask-fonts
             brew reinstall --cask font-jetbrains-mono
         fi
