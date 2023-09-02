@@ -1,5 +1,6 @@
+"
 "       Personal vim configuration of Marcelo Gheiler <me@marcelogheiler.com>
-
+"
 "--------------------------------------------------------------------------
 " General settings
 "--------------------------------------------------------------------------
@@ -77,9 +78,6 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap J mzJ`z
 
-" Open the current file in the default program
-nmap <leader>x :!xdg-open %<cr><cr>
-
 " Quicky escape to normal mode
 imap jj <esc>
 
@@ -103,38 +101,27 @@ endif
 call plug#begin(data_dir . '/plugins')
  
 source ~/.config/nvim/plugins/coc.vim
-source ~/.config/nvim/plugins/copilot.vim
-source ~/.config/nvim/plugins/commentary.vim
 source ~/.config/nvim/plugins/context-commentstring.vim
-source ~/.config/nvim/plugins/dispatch.vim
-source ~/.config/nvim/plugins/editorconfig.vim
-source ~/.config/nvim/plugins/eunuch.vim
+source ~/.config/nvim/plugins/copilot.vim
+source ~/.config/nvim/plugins/css-color.vim
 source ~/.config/nvim/plugins/exchange.vim
-source ~/.config/nvim/plugins/floaterm.vim
-source ~/.config/nvim/plugins/fugitive.vim
-source ~/.config/nvim/plugins/heritage.vim
+source ~/.config/nvim/plugins/guess-indent.vim
 source ~/.config/nvim/plugins/lastplace.vim
 source ~/.config/nvim/plugins/lightline.vim
 source ~/.config/nvim/plugins/lightspeed.vim
-source ~/.config/nvim/plugins/lion.vim
-source ~/.config/nvim/plugins/markdown-preview.vim
 source ~/.config/nvim/plugins/nerdtree.vim
 source ~/.config/nvim/plugins/onedark.vim
 source ~/.config/nvim/plugins/pasta.vim
-source ~/.config/nvim/plugins/peekaboo.vim
 source ~/.config/nvim/plugins/polyglot.vim
 source ~/.config/nvim/plugins/quickscope.vim
-source ~/.config/nvim/plugins/remote-containers.vim
+source ~/.config/nvim/plugins/rainbow.vim
 source ~/.config/nvim/plugins/repeat.vim
-source ~/.config/nvim/plugins/smooth-scroll.vim
+source ~/.config/nvim/plugins/smoothie.vim
 source ~/.config/nvim/plugins/splitjoin.vim
 source ~/.config/nvim/plugins/surround.vim
 source ~/.config/nvim/plugins/targets.vim
 source ~/.config/nvim/plugins/trouble.vim
-source ~/.config/nvim/plugins/unimpaired.vim
-source ~/.config/nvim/plugins/vim-test.vim
 source ~/.config/nvim/plugins/visual-multi.vim
-source ~/.config/nvim/plugins/visual-star-search.vim
 source ~/.config/nvim/plugins/which-key.vim
 
 call plug#end()
