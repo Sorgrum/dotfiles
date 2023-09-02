@@ -1,5 +1,5 @@
 # Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 #           Personal .zshrc file of Marcelo Gheiler <me@marcelogheiler.com>
 #
 
@@ -136,10 +136,35 @@
     alias up="docker compose up"
     alias dclean="docker system prune"
 
+    function git-remove-local-branches() {
+        if git tag > /dev/null 2>&1; then
+            git fetch -p \
+                && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); 
+                    do git branch -D $branch; 
+                done
+        else
+            echo "Command must be run in git repository";
+        fi
+    }
+
+    function git-commit-in-branch() {
+        if [ $# -lt 2 ]; then 
+            echo "Usage: $funcstack[1] <branch-name> <commit-hash>"
+            return
+        fi
+        
+        if git tag > /dev/null 2>&1; then
+            git rev-list $1 | grep `git rev-parse $2`
+        else
+            echo "Must be used in a git repository"
+            return
+        fi
+
+    }
 
     if [ -f ~/.zshrc_local ]; then
         source ~/.zshrc_local
     fi
 
 # Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
